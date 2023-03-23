@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+int numberSwaps;
+
+//Swaps the two numbers place by swapping the pointers
+void swapNumbers(int* ptr1, int* ptr2){
+  int temp = *ptr1;
+  *ptr1 = *ptr2;
+  *ptr2 = temp;
+}
+
+//moves down the array and swaps the numbers when needed
+void bubbleSort (int array[], int num, int swaps[]){
+  
+  int first, second;
+  
+  for(first = 0; first < num; first++){
+    
+    for(second = 0; second < num - first - 1; second++){
+      
+      if(array[second] > array[second + 1]){
+        swapNumbers( &array[second], &array[second + 1]);
+        numberSwaps++;
+swaps[second]++;
+swaps[second+1]++;
+      }
+    }
+  }
+}
+
+//this fucntion prints out the arrays
+void printArrays (int array[], int arrSize, int swaps[]){
+  int counter;
+  for (counter = 0; counter < arrSize; counter++){
+    printf("%d ", array[counter]);
+  }
+  printf("\nSwap Counters Per Index are =>\n");
+  for (counter = 0; counter < arrSize; counter++){
+    printf("%d ", swaps[counter]);
+  }
+}
+
+//this function gathers the array info and runs the bubble sort function to reorganize the numbers in the array from lowest to highest
+int main(){
+  
+  int array[] = { 97, 16, 45, 63, 13, 22, 7, 58, 72};
+  int swaps[9] = { 0 };
+  int number = sizeof(array) / sizeof(array[0]);
+  
+  numberSwaps = 0;
+  bubbleSort(array, number, swaps);
+  
+  printf("This is the sorted array: \n");
+  printArrays(array, number, swaps);
+  printf("\nin total, there were %d swaps and each swap was two index locations.\n", numberSwaps);
+  
+  return 0;
+}
